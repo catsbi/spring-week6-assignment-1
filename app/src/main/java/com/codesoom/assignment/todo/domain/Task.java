@@ -29,6 +29,11 @@ public class Task {
         this.title = title;
     }
 
+    public Task(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public static Task from(String title) {
         if (isInvalidTitle(title)) {
             throw new InvalidTaskTitleException();
