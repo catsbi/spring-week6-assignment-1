@@ -39,7 +39,7 @@ class TaskServiceTest {
     @DisplayName("findAllTasks 메서드는")
     @Nested
     class Describe_findAllTasks {
-        @DisplayName("할 일이 존재한다면")
+        @DisplayName("할 일이 존재 한다면")
         @Nested
         class Context_with_exists_tasks {
             private List<Task> tasks;
@@ -53,7 +53,7 @@ class TaskServiceTest {
                 tasks = taskRepository.saveAll(tasks);
             }
 
-            @DisplayName("할 일들이 담긴 목록을 반환한다.")
+            @DisplayName("할 일들이 담긴 목록을 반환 한다.")
             @Test
             void findAllTasksWithExistsTasks() {
                 final List<Task> foundTasks = taskService.findAllTasks();
@@ -112,7 +112,7 @@ class TaskServiceTest {
     @Nested
     class Describe_createTask {
 
-        @DisplayName("등록하고자 하는 할 일 내용이 유효한 경우, 저장되며 저장된 할 일을 반환한다.")
+        @DisplayName("등록 하고자 하는 할 일 내용이 유효한 경우, 저장되며 저장된 할 일을 반환한다.")
         @ParameterizedTest
         @ValueSource(strings = {"할 일1", "할 일2", "할 일3", "이것은 아주 길고 긴 할 일 할 일 할 일 할 일 4"})
         void createValidTask(String title) {
@@ -122,7 +122,7 @@ class TaskServiceTest {
 
         }
 
-        @DisplayName("등록하고자 하는 할 일 내용이 유효하지 않은 경우, 예외를 던진다.")
+        @DisplayName("등록 하고자 하는 할 일 내용이 유효하지 않은 경우, 예외를 던진다.")
         @ParameterizedTest
         @NullAndEmptySource
         void createInvalidTask(String invalidTitle) {
@@ -137,7 +137,7 @@ class TaskServiceTest {
     @Nested
     class Describe_updateTask {
 
-        @DisplayName("수정하고자 하는 할 일의 식별자가 존재할 경우")
+        @DisplayName("수정 하고자 하는 할 일의 식별자가 존재할 경우")
         @Nested
         class Context_with_exists_task {
             private Task task;
@@ -147,7 +147,7 @@ class TaskServiceTest {
                 task = taskRepository.save(Task.from("할 일1"));
             }
 
-            @DisplayName("수정할 내용이 유효하면, 할 일의 내용이 수정된다.")
+            @DisplayName("수정할 내용이 유효 하면, 할 일의 내용이 수정 된다.")
             @ParameterizedTest
             @ValueSource(strings = {"할 일1", "할 일2", "할 일3", "이것은 아주 길고 긴 할 일 할 일 할 일 할 일 4"})
             void updateWithValidData(String title) {
@@ -160,7 +160,7 @@ class TaskServiceTest {
 
             }
 
-            @DisplayName("수정할 내용이 유효하지 않다면, 예외를 던진다.")
+            @DisplayName("수정할 내용이 유효 하지 않다면, 예외를 던진다.")
             @ParameterizedTest
             @NullAndEmptySource
             void updateWithInvalidData(String invalidTitle) {
@@ -172,7 +172,7 @@ class TaskServiceTest {
 
         }
 
-        @DisplayName("수정하고자 하는 할 일의 식별자가 존재하지 않는 경우")
+        @DisplayName("수정 하고자 하는 할 일의 식별자가 존재 하지 않는 경우")
         @Nested
         class Context_with_not_exists_task {
             @DisplayName("예외를 던진다.")
@@ -196,7 +196,7 @@ class TaskServiceTest {
             task = taskRepository.save(Task.from("할 일"));
         }
 
-        @DisplayName("삭제하려는 할 일의 식별자가 존재할 경우, 삭제되며 삭제된 할 일 정보가 반환된다.")
+        @DisplayName("삭제 하려는 할 일의 식별자가 존재할 경우, 삭제되며 삭제된 할 일 정보가 반환된다.")
         @Test
         void deleteWithExistsTask() {
             final Task deletedTask = taskService.deleteTask(this.task.getId());
@@ -208,7 +208,7 @@ class TaskServiceTest {
 
         }
 
-        @DisplayName("삭제하려는 할 일의 식별자가 존재하지 않을 경우, 예외를 던진다.")
+        @DisplayName("삭제 하려는 할 일의 식별자가 존재하지 않을 경우, 예외를 던진다.")
         @Test
         void deleteWithNotExistsTask() {
             assertThatThrownBy(() -> taskService.deleteTask(100L))

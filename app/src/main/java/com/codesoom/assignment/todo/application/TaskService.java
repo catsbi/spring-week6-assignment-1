@@ -8,6 +8,7 @@ import com.codesoom.assignment.todo.errors.InvalidTaskTitleException;
 import com.codesoom.assignment.todo.errors.TaskNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class TaskService {
     private final TaskRepository taskRepository;
 
@@ -24,8 +26,8 @@ public class TaskService {
      *
      * @return 할 일 목록
      */
-    public List<Task> findAllTasks(){
-        return null;
+    public List<Task> findAllTasks() {
+        return taskRepository.findAll();
     }
 
     /**
@@ -35,8 +37,9 @@ public class TaskService {
      * @return 할 일 상세 정보
      * @throws TaskNotFoundException 해당 식별자 할 일이 없는 경우
      */
-    public Task findTask(Long id){
-        return null;
+    public Task findTask(Long id) {
+        return taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException(id));
     }
 
     /**
@@ -46,8 +49,10 @@ public class TaskService {
      * @return 등록된 할 일 상세정보
      * @throws InvalidTaskTitleException 할 일 내용이 유효하지 않는 경우
      */
-    public Task createTask(EntitySupplier supplier){
-        return null;
+    public Task createTask(EntitySupplier<Task> supplier) {
+        Task newTask = supplier.toEntity();
+
+        return taskRepository.save(newTask);
     }
 
     /**
@@ -57,8 +62,16 @@ public class TaskService {
      * @return 수정된 할 일 상세정보
      * @throws InvalidTaskTitleException 할 일 내용이 유효하지 않는 경우
      */
-    public Task updateTask(Long id, EntitySupplier supplier){
-        return null;
+    @Transactional
+    public Task updateTask(Long id, EntitySupplier<Task> supplier) {
+        final Task foundTask = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException(id));
+
+        final Task targetTask = supplier.toEntity();
+
+        foundTask.update(targetTask);
+
+        return foundTask;
     }
 
     /**
@@ -68,7 +81,12 @@ public class TaskService {
      * @return 삭제된 할 일 상세정보
      * @throws TaskNotFoundException 해당 식별자 할 일이 없는 경우
      */
-    public Task deleteTask(Long id){
-        return null;
+    public Task deleteTask(Long id) {
+        final Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException(id));
+
+        taskRepository.delete(task);
+
+        return task;
     }
 }
