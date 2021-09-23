@@ -1,6 +1,7 @@
 package com.codesoom.assignment.todo.domain;
 
 import com.codesoom.assignment.todo.errors.InvalidTaskTitleException;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,23 +44,6 @@ public class Task {
 
     private static boolean isInvalidTitle(String title) {
         return Objects.isNull(title) || title.isBlank();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Task)) {
-            return false;
-        }
-        Task task = (Task) o;
-        return Objects.equals(id, task.id) && Objects.equals(title, task.title);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title);
     }
 
     public void update(Task target) {

@@ -9,10 +9,22 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class TaskData implements EntitySupplier<Task> {
+
+    private Long id;
+
     private String title;
 
     public TaskData(String title) {
+        this(null, title);
+    }
+
+    public TaskData(Long id, String title) {
+        this.id = id;
         this.title = title;
+    }
+
+    public static TaskData of(Task task) {
+        return new TaskData(task.getId(), task.getTitle());
     }
 
     @Override

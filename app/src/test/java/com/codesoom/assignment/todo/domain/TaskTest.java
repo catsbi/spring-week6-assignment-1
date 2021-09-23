@@ -108,7 +108,7 @@ class TaskTest {
         void updateTaskWithInvalidTitle(String invalidTitle) {
             ReflectionTestUtils.setField(invalidTask, "title", invalidTitle);
 
-            assertThatThrownBy(()-> originTask.update(invalidTask))
+            assertThatThrownBy(() -> originTask.update(invalidTask))
                     .isInstanceOf(InvalidTaskTitleException.class);
         }
     }

@@ -117,7 +117,7 @@ class TaskRepositoryTest {
         @DisplayName("할 일 목록이 Iterable의 구현체면 저장한다.")
         @ParameterizedTest
         @ArgumentsSource(provideVariousTypesTaskList.class)
-        void saveAll(Iterable<Task> it){
+        void saveAll(Iterable<Task> it) {
             final List<Task> savedTasks = taskRepository.saveAll(it);
 
             for (Task task : it) {
@@ -188,6 +188,8 @@ class TaskRepositoryTest {
 
         @BeforeEach
         void setUp() {
+            taskRepository.deleteAll();
+
             tasks = IntStream.rangeClosed(MIN_SIZE, MAX_SIZE)
                     .mapToObj(index -> Task.from("taskTitle" + index))
                     .collect(Collectors.toList());
