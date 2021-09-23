@@ -17,29 +17,27 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 public class Task {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
     public Task(String title) {
-        if (isInvalidTitle(title)) {
-            throw new InvalidTaskTitleException();
-        }
-        this.title = title;
+        this(null, title);
     }
 
     public Task(Long id, String title) {
+        if (isInvalidTitle(title)) {
+            throw new InvalidTaskTitleException();
+        }
+
         this.id = id;
         this.title = title;
     }
 
     public static Task from(String title) {
-        if (isInvalidTitle(title)) {
-            throw new InvalidTaskTitleException();
-        }
-
-        return new Task(title);
+        return new Task(null, title);
     }
 
     private static boolean isInvalidTitle(String title) {
