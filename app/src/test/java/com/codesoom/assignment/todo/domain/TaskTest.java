@@ -1,5 +1,6 @@
 package com.codesoom.assignment.todo.domain;
 
+import com.codesoom.assignment.todo.errors.InvalidTaskTitleException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

@@ -1,5 +1,6 @@
 package com.codesoom.assignment.todo.domain;
 
+import com.codesoom.assignment.todo.errors.InvalidTaskTitleException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +23,22 @@ public class Task {
     private String title;
 
     public Task(String title) {
+        if (isInvalidTitle(title)) {
+            throw new InvalidTaskTitleException();
+        }
         this.title = title;
+    }
+
+    public static Task from(String title) {
+        if (isInvalidTitle(title)) {
+            throw new InvalidTaskTitleException();
+        }
+
+        return new Task(title);
+    }
+
+    private static boolean isInvalidTitle(String title) {
+        return Objects.isNull(title) || title.isBlank();
     }
 
     @Override
@@ -40,5 +56,13 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, title);
+    }
+
+    public void update(Task target) {
+        if (isInvalidTitle(target.getTitle())) {
+            throw new InvalidTaskTitleException();
+        }
+
+        title = target.title;
     }
 }
