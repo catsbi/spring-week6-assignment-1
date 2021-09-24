@@ -15,6 +15,7 @@ import java.util.List;
  * 고양이 장난감 수정하기     - Product updateProduct(Long id, EntitySupplier data)
  * 고양이 장난감 삭제하기     - Product deleteProduct(Long id)
  */
+
 /**
  * 상품을 관리 한다.
  */
@@ -24,23 +25,23 @@ public class ProductService {
     private final ProductRepository productRepository;
 
 
-    public List<Product> findAllProduct(){
+    public List<Product> findAllProduct() {
         return null;
     }
 
-    public Product findProduct(Long id){
+    public Product findProduct(Long id) {
         return null;
     }
 
-    public Product createProduct(EntitySupplier supplier){
+    public Product createProduct(EntitySupplier supplier) {
         return null;
     }
 
-    public Product updateProduct(Long id, EntitySupplier supplier){
+    public Product updateProduct(Long id, EntitySupplier supplier) {
         return null;
     }
 
-    public Product deleteProduct(Long id){
+    public Product deleteProduct(Long id) {
         return null;
     }
 }

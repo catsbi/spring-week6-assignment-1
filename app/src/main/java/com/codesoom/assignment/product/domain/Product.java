@@ -1,5 +1,7 @@
 package com.codesoom.assignment.product.domain;
 
+import com.codesoom.assignment.product.errors.InvalidProductArgumentException;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Generated;
 import lombok.Getter;
@@ -11,6 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
+import static com.codesoom.assignment.product.infra.Validators.isValidNumber;
+import static com.codesoom.assignment.product.infra.Validators.isValidString;
+
 /**
  * 상품 정보
  */
@@ -18,6 +23,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @Builder
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -31,6 +37,30 @@ public class Product {
     private Integer price;
 
     private String imageUrl;
+
+    public Product(String name, String maker, Integer price, String imageUrl) {
+        validCheckOrElseThrows(name, maker, price, imageUrl);
+
+        this.name = name;
+        this.maker = maker;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
+    private void validCheckOrElseThrows(String name, String maker, Integer price, String imageUrl) {
+        if (!isValidString(name)) {
+            throw new InvalidProductArgumentException(name);
+        }
+        if (!isValidString(maker)) {
+            throw new InvalidProductArgumentException(maker);
+        }
+        if (!isValidString(imageUrl)) {
+            throw new InvalidProductArgumentException(imageUrl);
+        }
+        if (!isValidNumber(price)) {
+            throw new InvalidProductArgumentException(price);
+        }
+    }
 
     @Override
     @Generated
