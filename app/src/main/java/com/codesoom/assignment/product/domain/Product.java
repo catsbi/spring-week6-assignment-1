@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * 상품 정보
+ */
 @Entity
 @Getter
 @NoArgsConstructor
