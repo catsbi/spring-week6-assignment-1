@@ -24,6 +24,11 @@ public class ProductSaveData implements EntitySupplier<Product> {
 
     @Override
     public Product toEntity() {
-        return null;
+        return Product.builder()
+                .name(name)
+                .maker(maker)
+                .price(price)
+                .imageUrl(imageUrl)
+                .build();
     }
 }

@@ -47,6 +47,10 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    private void validCheckOrElseThrows(Product target) {
+        validCheckOrElseThrows(target.name, target.maker, target.price, target.imageUrl);
+    }
+
     private void validCheckOrElseThrows(String name, String maker, Integer price, String imageUrl) {
         if (!isValidString(name)) {
             throw new InvalidProductArgumentException(name);
@@ -83,5 +87,14 @@ public class Product {
     @Generated
     public int hashCode() {
         return Objects.hash(id, name, maker, price, imageUrl);
+    }
+
+    public void update(Product target) {
+        validCheckOrElseThrows(target);
+
+        this.name = target.name;
+        this.maker = target.maker;
+        this.price = target.price;
+        this.imageUrl = target.imageUrl;
     }
 }

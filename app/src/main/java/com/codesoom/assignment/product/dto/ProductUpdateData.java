@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductUpdateData implements EntitySupplier {
+public class ProductUpdateData implements EntitySupplier<Product> {
 
     private String name;
 
@@ -23,6 +23,11 @@ public class ProductUpdateData implements EntitySupplier {
 
     @Override
     public Product toEntity() {
-        return null;
+        return Product.builder()
+                .name(name)
+                .maker(maker)
+                .price(price)
+                .imageUrl(imageUrl)
+                .build();
     }
 }
