@@ -1,7 +1,6 @@
 package com.codesoom.assignment.product.domain;
 
 import com.codesoom.assignment.product.errors.InvalidProductArgumentException;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Generated;
 import lombok.Getter;
@@ -23,7 +22,6 @@ import static com.codesoom.assignment.product.infra.Validators.isValidString;
 @Getter
 @NoArgsConstructor
 @Builder
-@AllArgsConstructor
 public class Product {
 
     @Id
@@ -41,6 +39,16 @@ public class Product {
     public Product(String name, String maker, Integer price, String imageUrl) {
         validCheckOrElseThrows(name, maker, price, imageUrl);
 
+        this.name = name;
+        this.maker = maker;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
+    public Product(Long id, String name, String maker, Integer price, String imageUrl) {
+        validCheckOrElseThrows(name, maker, price, imageUrl);
+
+        this.id = id;
         this.name = name;
         this.maker = maker;
         this.price = price;
