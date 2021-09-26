@@ -67,15 +67,15 @@ public class ProductInMemoryRepository implements ProductRepository {
     @Override
     public Product save(Product product) {
         if (isNew(product)) {
-            final Long generatedId = idGenerator.generate(sequence);
+            sequence = idGenerator.generate(sequence);
             final Product newProduct = Product.builder()
-                    .id(generatedId)
+                    .id(sequence)
                     .name(product.getName())
                     .maker(product.getMaker())
                     .price(product.getPrice())
                     .imageUrl(product.getImageUrl()).build();
 
-            store.put(generatedId, newProduct);
+            store.put(sequence, newProduct);
 
             return newProduct;
         }

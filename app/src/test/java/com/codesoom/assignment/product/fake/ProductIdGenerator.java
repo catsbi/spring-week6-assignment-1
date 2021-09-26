@@ -7,6 +7,6 @@ public class ProductIdGenerator implements IdGenerator<Long> {
 
     @Override
     public Long generate(Long source) {
-        return ++source;
+        return source + 1;
     }
 }
