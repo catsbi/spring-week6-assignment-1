@@ -1,6 +1,7 @@
 package com.codesoom.assignment.account.domain;
 
 import com.codesoom.assignment.account.providers.ProvideValidAccountArguments;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -31,6 +32,11 @@ class AccountRepositoryTest {
     @BeforeEach
     void setUp() {
         accounts = accountRepository.saveAll(Arrays.asList(캣츠비, 크롱, 나나, 맥스틸, 코드숨));
+    }
+
+    @AfterEach
+    void cleanUp() {
+        accountRepository.deleteAll();
     }
 
     @Autowired

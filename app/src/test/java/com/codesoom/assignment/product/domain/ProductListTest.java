@@ -140,8 +140,8 @@ class ProductListTest {
     void removeWithProduct() {
         final ProductList productList = ProductList.from(products);
 
-        for (int i = 0; i < productList.size(); i++) {
-            final Product product = productList.get(i);
+        for (int i = 0; i < products.size(); i++) {
+            final Product product = products.get(i);
 
             productList.remove(product);
         }
@@ -153,9 +153,10 @@ class ProductListTest {
     @Test
     void removeWithIndex() {
         final ProductList productList = ProductList.from(products);
+        final int productSize = productList.size();
 
-        for (int i = 0; i < productList.size(); i++) {
-            productList.remove(i);
+        for (int i = 0; i < productSize; i++) {
+            productList.remove(0);
         }
 
         assertThat(productList.isEmpty()).isTrue();
