@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 상품 정보 일급 컬렉션
+ */
 public class ProductList {
     private final List<Product> store = new ArrayList<>();
 
