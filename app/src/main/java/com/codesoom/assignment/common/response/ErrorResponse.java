@@ -1,4 +1,4 @@
-package com.codesoom.assignment.todo.dto;
+package com.codesoom.assignment.common.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

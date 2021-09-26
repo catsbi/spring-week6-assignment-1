@@ -1,6 +1,6 @@
 package com.codesoom.assignment.todo.controllers;
 
-import com.codesoom.assignment.todo.dto.ErrorResponse;
+import com.codesoom.assignment.common.response.ErrorResponse;
 import com.codesoom.assignment.todo.errors.InvalidTaskTitleException;
 import com.codesoom.assignment.todo.errors.TaskNotFoundException;
 import lombok.extern.slf4j.Slf4j;
