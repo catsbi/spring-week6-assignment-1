@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 /**
  * 회원 정보
@@ -67,5 +68,26 @@ public class Account implements Identifier {
         return !deleted
                 && email.equals(identifier.getEmail())
                 && password.equals(identifier.getPassword());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Account)) {
+            return false;
+        }
+        Account account = (Account) o;
+        return deleted == account.deleted
+                && Objects.equals(id, account.id)
+                && Objects.equals(email, account.email)
+                && Objects.equals(name, account.name)
+                && Objects.equals(password, account.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, name, password, deleted);
     }
 }
