@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * 회원 정보를 저장한다.
  */
-public interface AccountJpaRepository extends JpaRepository<Account, Long> , AccountRepository {
+public interface AccountJpaRepository extends JpaRepository<Account, Long>, AccountRepository {
 }

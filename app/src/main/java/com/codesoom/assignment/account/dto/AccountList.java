@@ -20,9 +20,10 @@ import java.util.List;
 public class AccountList {
     private final List<Account> store = new ArrayList<>();
 
-    private AccountList(){}
+    private AccountList() {
+    }
 
-    public static AccountList newInstance(){
+    public static AccountList newInstance() {
         return new AccountList();
     }
 }

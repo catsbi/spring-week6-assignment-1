@@ -82,10 +82,10 @@ public class TaskController {
     /**
      * 할 일을 수정한다.
      *
-     * @param id 수정 할 할일 식별자
+     * @param id       수정 할 할일 식별자
      * @param taskData 할 일
      * @return 수정된 할 일 정보
-     * @throws TaskNotFoundException 할 일을 찾을 수 없는 경우
+     * @throws TaskNotFoundException     할 일을 찾을 수 없는 경우
      * @throws InvalidTaskTitleException 할 일 정보가 유효하지 않은 경우
      */
     @RequestMapping(path = "{id}", method = {RequestMethod.PUT, RequestMethod.PATCH})

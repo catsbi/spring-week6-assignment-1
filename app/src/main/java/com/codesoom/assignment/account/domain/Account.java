@@ -34,8 +34,8 @@ public class Account implements Identifier {
     @NotBlank
     private String password;
 
-    @Column(columnDefinition="BOOLEAN DEFAULT false")
-    private Boolean isDeleted;
+    @Column(columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean deleted;
 
     public Account(String email, String name, String password) {
         this(null, email, name, password, false);
@@ -46,6 +46,26 @@ public class Account implements Identifier {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.isDeleted = isDeleted;
+        this.deleted = isDeleted;
+    }
+
+    public void update(Account account) {
+        this.email = account.email;
+        this.name = account.name;
+        this.password = account.password;
+    }
+
+    public void delete() {
+        deleted = true;
+    }
+
+    public void restore() {
+        deleted = false;
+    }
+
+    public boolean isMatches(Identifier identifier) {
+        return !deleted
+                && email.equals(identifier.getEmail())
+                && password.equals(identifier.getPassword());
     }
 }
