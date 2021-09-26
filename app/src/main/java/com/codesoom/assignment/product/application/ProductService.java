@@ -2,13 +2,12 @@ package com.codesoom.assignment.product.application;
 
 import com.codesoom.assignment.common.convertors.EntitySupplier;
 import com.codesoom.assignment.product.domain.Product;
+import com.codesoom.assignment.product.domain.ProductList;
 import com.codesoom.assignment.product.domain.ProductRepository;
 import com.codesoom.assignment.product.errors.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * 상품을 관리 한다.
@@ -19,8 +18,8 @@ public class ProductService {
     private final ProductRepository productRepository;
 
 
-    public List<Product> findAllProduct() {
-        return productRepository.findAll();
+    public ProductList findAllProduct() {
+        return ProductList.from(productRepository.findAll());
     }
 
     public Product findProduct(Long id) {

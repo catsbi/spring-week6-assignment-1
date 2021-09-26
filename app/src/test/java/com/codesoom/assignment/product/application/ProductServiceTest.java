@@ -1,6 +1,7 @@
 package com.codesoom.assignment.product.application;
 
 import com.codesoom.assignment.product.domain.Product;
+import com.codesoom.assignment.product.domain.ProductList;
 import com.codesoom.assignment.product.domain.ProductRepository;
 import com.codesoom.assignment.product.dto.ProductSaveData;
 import com.codesoom.assignment.product.dto.ProductUpdateData;
@@ -58,10 +59,10 @@ class ProductServiceTest {
         @DisplayName("등록된 상품이 있을 경우 상품 목록을 반환한다.")
         @Test
         void findAllWithRegisteredProducts() {
-            final List<Product> foundProducts = productService.findAllProduct();
+            final ProductList foundProducts = productService.findAllProduct();
 
             assertThat(foundProducts.isEmpty()).isFalse();
-            assertThat(foundProducts).hasSize(products.size());
+            assertThat(foundProducts.size()).isEqualTo(products.size());
         }
 
         @DisplayName("등록된 상품이 없을 경우 빈 목록을 반환한다.")
@@ -69,9 +70,9 @@ class ProductServiceTest {
         void findAllWithoutRegisteredProducts() {
             productRepository.deleteAll();
 
-            final List<Product> foundProducts = productService.findAllProduct();
+            final ProductList foundProducts = productService.findAllProduct();
 
-            assertThat(foundProducts).isEmpty();
+            assertThat(foundProducts.isEmpty()).isTrue();
         }
     }
 
